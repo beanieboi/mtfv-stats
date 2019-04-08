@@ -35,6 +35,10 @@ module Scraper
 
     def self.results_from_match_link(result_link)
       puts "importing results for #{result_link}"
+      agent = Mechanize.new
+
+      result_page = agent.get("http://www.mtfv1.de#{result_link}")
+      result_page.search('//*/table[5]')
     end
 
     def self.external_mtfv_id_from_link(link)
