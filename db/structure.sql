@@ -61,6 +61,10 @@ ALTER SEQUENCE public.leagues_id_seq OWNED BY public.leagues.id;
 
 CREATE TABLE public.matches (
     id bigint NOT NULL,
+    home_team_id integer,
+    away_team_id integer,
+    played_at timestamp without time zone,
+    external_mtfv_id integer NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -163,7 +167,7 @@ CREATE TABLE public.schema_migrations (
 
 CREATE TABLE public.seasons (
     id bigint NOT NULL,
-    name text NOT NULL,
+    name character varying NOT NULL,
     teams integer[] NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL

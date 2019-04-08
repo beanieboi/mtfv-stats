@@ -4,10 +4,10 @@ module Scraper
 
     def self.run
       @agent = Mechanize.new
+      overview_page = @agent.get(LANDESKLASSE_1)
 
-      Extractor.teams_from_page(
-        @agent.get(LANDESKLASSE_1)
-      )
+      Extractor.teams_from_page(overview_page)
+      Extractor.matches_from_page(overview_page)
     end
   end
 end
