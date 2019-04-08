@@ -1,0 +1,22 @@
+# SQLite version 3.x
+#   gem install sqlite3
+#
+#   Ensure the SQLite 3 gem is defined in your Gemfile
+#   gem 'sqlite3'
+#
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  username: bfritsch
+  password:
+
+development:
+  <<: *default
+  database: mtfv_development
+
+test:
+  <<: *default
+  database: mtfv_test
+
+production:
+  url: <%= ENV['DATABASE_URL'] %>
