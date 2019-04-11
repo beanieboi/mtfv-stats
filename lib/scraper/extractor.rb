@@ -38,7 +38,38 @@ module Scraper
       agent = Mechanize.new
 
       result_page = agent.get("http://www.mtfv1.de#{result_link}")
-      result_page.search('//*/table[5]')
+      result_page.search('//*/table[3]').search("tr").each do |tr_line|
+        next if tr_line.attr("class") != "sectiontableentry2" && tr_line.attr("class") != "sectiontableentry1"
+
+        # Spiel ist Doppel
+        if tr_line.search("td")[3].children[1].name == "img"
+          home_players_external_mtfv_id = double_player_id_from_td(tr_line.search("td")[4])
+          home_score, away_score = score_from_td(tr_line.search("td")[5])
+          away_players_external_mtfv_id = double_player_id_from_td(tr_line.search("td")[6])
+
+          puts "#{home_players_external_mtfv_id} #{home_score}:#{away_score} #{away_players_external_mtfv_id}"
+        else
+          home_player_external_mtfv_id = single_player_id_from_td(tr_line.search("td")[3])
+          home_score, away_score = score_from_td(tr_line.search("td")[4])
+          away_player_external_mtfv_id = single_player_id_from_td(tr_line.search("td")[5])
+
+          puts "#{home_player_external_mtfv_id} #{home_score}:#{away_score} #{away_player_external_mtfv_id}"
+        end
+      end
+    end
+
+    def self.double_player_id_from_td(td_line)
+      player_one_id = external_mtfv_id_from_link(td_line.children[1].attr("href"))
+      player_two_id = external_mtfv_id_from_link(td_line.children[4].attr("href"))
+      [player_one_id, player_two_id]
+    end
+
+    def self.single_player_id_from_td(td_line)
+      external_mtfv_id_from_link(td_line.children[1].attr("href"))
+    end
+
+    def self.score_from_td(score_td)
+      score_td.text.split(":")
     end
 
     def self.external_mtfv_id_from_link(link)
