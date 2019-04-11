@@ -31,6 +31,8 @@ CREATE TABLE public.ar_internal_metadata (
 CREATE TABLE public.leagues (
     id bigint NOT NULL,
     season_id integer,
+    name text NOT NULL,
+    external_mtfv_id integer NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -64,7 +66,12 @@ CREATE TABLE public.matches (
     home_team_id integer,
     away_team_id integer,
     played_at timestamp without time zone,
+    league_id integer NOT NULL,
     external_mtfv_id integer NOT NULL,
+    home_goals integer,
+    away_goals integer,
+    home_score integer,
+    away_score integer,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -131,8 +138,8 @@ CREATE TABLE public.results (
     match_id integer NOT NULL,
     home_player_ids integer[] NOT NULL,
     away_player_ids integer[] NOT NULL,
-    home_score integer NOT NULL,
-    away_score integer NOT NULL,
+    home_goals integer NOT NULL,
+    away_goals integer NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -173,7 +180,7 @@ CREATE TABLE public.schema_migrations (
 CREATE TABLE public.seasons (
     id bigint NOT NULL,
     name character varying NOT NULL,
-    teams integer[] NOT NULL,
+    teams integer[],
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
@@ -207,6 +214,14 @@ CREATE TABLE public.teams (
     name text NOT NULL,
     league_id integer,
     external_mtfv_id integer NOT NULL,
+    goals integer,
+    goals_against integer,
+    score integer,
+    score_against integer,
+    matches_won integer,
+    matches_draw integer,
+    matches_lost integer,
+    points integer,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
