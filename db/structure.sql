@@ -128,6 +128,11 @@ ALTER SEQUENCE public.players_id_seq OWNED BY public.players.id;
 
 CREATE TABLE public.results (
     id bigint NOT NULL,
+    match_id integer NOT NULL,
+    home_player_ids integer[] NOT NULL,
+    away_player_ids integer[] NOT NULL,
+    home_score integer NOT NULL,
+    away_score integer NOT NULL,
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
