@@ -8,6 +8,7 @@ gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'sass-rails', '~> 5.0'
 gem "bulma-rails", "~> 0.7.4"
+gem "scenic"
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.1', require: false

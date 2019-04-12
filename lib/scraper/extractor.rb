@@ -50,11 +50,17 @@ module Scraper
       result_page.search('//*/table[3]').search("tr").each do |tr_line|
         next if tr_line.attr("class") != "sectiontableentry2" && tr_line.attr("class") != "sectiontableentry1"
 
-        # Spiel ist Doppel
-        if tr_line.search("td")[3].children[1].name == "img"
+        # single game default win away
+        if tr_line.search("td")[3].children[1].nil?
+          home_player_ids = [0]
+          home_goals, away_goals = score_from_td(tr_line.search("td")[4])
+          away_player_ids = [0]
+        # regular double game
+        elsif tr_line.search("td")[3].children[1].name == "img"
           home_player_ids = double_player_id_from_td(tr_line.search("td")[4])
           home_goals, away_goals = score_from_td(tr_line.search("td")[5])
           away_player_ids = double_player_id_from_td(tr_line.search("td")[6])
+        # regular single game
         else
           home_player_ids = single_player_id_from_td(tr_line.search("td")[3])
           home_goals, away_goals = score_from_td(tr_line.search("td")[4])
@@ -73,20 +79,41 @@ module Scraper
     end
 
     def self.double_player_id_from_td(td_line)
-      external_mtfv_player_one_id = external_mtfv_id_from_link(td_line.children[1].attr("href"))
-      external_mtfv_player_two_id = external_mtfv_id_from_link(td_line.children[4].attr("href"))
+      # regular double game
+      if td_line.children[1]
+        external_mtfv_player_one_id = external_mtfv_id_from_link(td_line.children[1].attr("href"))
+        name_player_one  = td_line.children[1].text.strip
+      else
+        external_mtfv_player_one_id = 9999999
+        name_player_one = "Unbekannt"
+      end
+
+      if td_line.children[4]
+        external_mtfv_player_two_id = external_mtfv_id_from_link(td_line.children[4].attr("href"))
+        name_player_two = td_line.children[4].text.strip
+      else
+        external_mtfv_player_two_id = 9999999
+        name_player_two = "Unbekannt"
+      end
 
       [
-        create_or_find_player(external_mtfv_player_one_id, td_line.children[1].text.strip).id,
-        create_or_find_player(external_mtfv_player_two_id, td_line.children[4].text.strip).id
+        create_or_find_player(external_mtfv_player_one_id, name_player_one).id,
+        create_or_find_player(external_mtfv_player_two_id, name_player_two).id
       ]
     end
 
     def self.single_player_id_from_td(td_line)
-      external_mtfv_player_id = external_mtfv_id_from_link(td_line.children[1].attr("href"))
+      # regular single game
+      if td_line.children[1]
+        external_mtfv_player_id = external_mtfv_id_from_link(td_line.children[1].attr("href"))
+        name_player = td_line.text.strip
+      else
+        external_mtfv_player_id = 9999999
+        name_player = "Unbekannt"
+      end
 
       [
-        create_or_find_player(external_mtfv_player_id, td_line.text.strip).id
+        create_or_find_player(external_mtfv_player_id, name_player).id
       ]
     end
 

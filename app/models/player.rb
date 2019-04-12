@@ -2,24 +2,40 @@ class Player < ApplicationRecord
   belongs_to :team, optional: true
   has_many :stats, class_name: "PlayerStats"
 
-  def home_results_single
-    Result.where("home_player_ids @> ARRAY[?]", self.id).
-      where("array_length(home_player_ids, 1) = 1")
+  def home_results_single_in_league(league)
+    Result.singles.in_league(league).for_home_player(self)
   end
 
-  def home_results_double
-    Result.where("home_player_ids @> ARRAY[?]", self.id).
-      where("array_length(home_player_ids, 1) = 2")
+  def home_results_double_in_league(league)
+    Result.doubles.in_league(league).for_home_player(self)
   end
 
-  def away_results_single
-    Result.where("away_player_ids @> ARRAY[?]", self.id).
-      where("array_length(home_player_ids, 1) = 1")
+  def away_results_single_in_league(league)
+    Result.singles.in_league(league).for_away_player(self)
   end
 
-  def away_results_double
-    Result.where("away_player_ids @> ARRAY[?]", self.id).
-      where("array_length(home_player_ids, 1) = 2")
+  def away_results_double_in_league(league)
+    Result.doubles.in_league(league).for_away_player(self)
+  end
+
+  def double_results_in_league(league)
+    home_results_double.or(away_results_double)
+  end
+
+  def away_results_in_league(league)
+    away_results_single.or(away_results_double)
+  end
+
+  def home_results_in_league(league)
+    home_results_single.or(home_results_double)
+  end
+
+  def away_results_in_league(league)
+    away_results_single.or(away_results_double)
+  end
+
+  def home_results_in_league(league)
+    home_results_single.or(home_results_double)
   end
 
   def leagues
@@ -34,12 +50,28 @@ class Player < ApplicationRecord
     home_results.or(away_results)
   end
 
+  def home_results
+    home_results_single.or(home_results_double)
+  end
+
   def away_results
     away_results_single.or(away_results_double)
   end
 
-  def home_results
-    home_results_single.or(home_results_double)
+  def home_results_single
+    Result.singles.for_home_player(self)
+  end
+
+  def home_results_double
+    Result.doubles.for_home_player(self)
+  end
+
+  def away_results_single
+    Result.singles.for_away_player(self)
+  end
+
+  def away_results_double
+    Result.doubles.for_away_player(self)
   end
 
   def goals

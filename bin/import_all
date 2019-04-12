@@ -1,0 +1,5 @@
+#!/bin/sh
+
+bundle exec rails scraper:fetch
+bundle exec rails maintenance:all
+bundle exec rails stats:all

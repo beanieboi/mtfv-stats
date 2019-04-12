@@ -25,6 +25,43 @@ CREATE TABLE public.ar_internal_metadata (
 
 
 --
+-- Name: double_stats; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.double_stats (
+    id bigint NOT NULL,
+    player_ids integer[] NOT NULL,
+    league_id integer NOT NULL,
+    overall_performance_index integer DEFAULT 0,
+    overall_score integer DEFAULT 0,
+    overall_score_against integer DEFAULT 0,
+    overall_goals integer DEFAULT 0,
+    overall_goals_against integer DEFAULT 0,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: double_stats_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.double_stats_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: double_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.double_stats_id_seq OWNED BY public.double_stats.id;
+
+
+--
 -- Name: leagues; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -55,6 +92,74 @@ CREATE SEQUENCE public.leagues_id_seq
 --
 
 ALTER SEQUENCE public.leagues_id_seq OWNED BY public.leagues.id;
+
+
+--
+-- Name: lifetime_double_stats; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.lifetime_double_stats AS
+ SELECT double_stats.player_ids,
+    sum(double_stats.overall_performance_index) AS overall_performance_index,
+    sum(double_stats.overall_score) AS overall_score,
+    sum(double_stats.overall_score_against) AS overall_score_against,
+    sum(double_stats.overall_goals) AS overall_goals,
+    sum(double_stats.overall_goals_against) AS overall_goals_against
+   FROM public.double_stats
+  GROUP BY double_stats.player_ids;
+
+
+--
+-- Name: player_stats; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.player_stats (
+    id bigint NOT NULL,
+    player_id integer NOT NULL,
+    league_id integer NOT NULL,
+    overall_performance_index integer DEFAULT 0,
+    overall_score integer DEFAULT 0,
+    overall_score_against integer DEFAULT 0,
+    overall_goals integer DEFAULT 0,
+    overall_goals_against integer DEFAULT 0,
+    single_performance_index integer DEFAULT 0,
+    single_score integer DEFAULT 0,
+    single_score_against integer DEFAULT 0,
+    single_goals integer DEFAULT 0,
+    single_goals_against integer DEFAULT 0,
+    double_performance_index integer DEFAULT 0,
+    double_score integer DEFAULT 0,
+    double_score_against integer DEFAULT 0,
+    double_goals integer DEFAULT 0,
+    double_goals_against integer DEFAULT 0,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: lifetime_player_stats; Type: VIEW; Schema: public; Owner: -
+--
+
+CREATE VIEW public.lifetime_player_stats AS
+ SELECT player_stats.player_id,
+    sum(player_stats.overall_performance_index) AS overall_performance_index,
+    sum(player_stats.overall_score) AS overall_score,
+    sum(player_stats.overall_score_against) AS overall_score_against,
+    sum(player_stats.overall_goals) AS overall_goals,
+    sum(player_stats.overall_goals_against) AS overall_goals_against,
+    sum(player_stats.single_performance_index) AS single_performance_index,
+    sum(player_stats.single_score) AS single_score,
+    sum(player_stats.single_score_against) AS single_score_against,
+    sum(player_stats.single_goals) AS single_goals,
+    sum(player_stats.single_goals_against) AS single_goals_against,
+    sum(player_stats.double_performance_index) AS double_performance_index,
+    sum(player_stats.double_score) AS double_score,
+    sum(player_stats.double_score_against) AS double_score_against,
+    sum(player_stats.double_goals) AS double_goals,
+    sum(player_stats.double_goals_against) AS double_goals_against
+   FROM public.player_stats
+  GROUP BY player_stats.player_id;
 
 
 --
@@ -94,24 +199,6 @@ CREATE SEQUENCE public.matches_id_seq
 --
 
 ALTER SEQUENCE public.matches_id_seq OWNED BY public.matches.id;
-
-
---
--- Name: player_stats; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.player_stats (
-    id bigint NOT NULL,
-    player_id integer NOT NULL,
-    league_id integer NOT NULL,
-    performance_index integer,
-    score integer,
-    score_against integer,
-    goals integer,
-    goals_against integer,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
 
 
 --
@@ -284,6 +371,13 @@ ALTER SEQUENCE public.teams_id_seq OWNED BY public.teams.id;
 
 
 --
+-- Name: double_stats id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.double_stats ALTER COLUMN id SET DEFAULT nextval('public.double_stats_id_seq'::regclass);
+
+
+--
 -- Name: leagues id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -338,6 +432,14 @@ ALTER TABLE ONLY public.teams ALTER COLUMN id SET DEFAULT nextval('public.teams_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: double_stats double_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.double_stats
+    ADD CONSTRAINT double_stats_pkey PRIMARY KEY (id);
 
 
 --
@@ -417,6 +519,9 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190408093308'),
 ('20190408093312'),
 ('20190408093854'),
-('20190411213202');
+('20190411213202'),
+('20190412093050'),
+('20190412141436'),
+('20190412142258');
 
 

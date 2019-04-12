@@ -1,17 +1,66 @@
 module Scraper
   class Fetcher
     SCRAPE_URLS = [
+      # {
+      #   "season" => "2019",
+      #   "leagues" => [
+      #     { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=34" },
+      #     { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=35" },
+      #     { "name" => "Landesklasse 1", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=37" },
+      #     { "name" => "Landesklasse 2", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=39" },
+      #   ]
+      # },
       {
-        "season" => "2019",
+        "season" => "2018",
         "leagues" => [
-          # { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=34" },
-          { "name" => "Landesklasse 1", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=37" }
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=31" },
+          { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=29" },
+          { "name" => "Landesklasse", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=30" },
+        ]
+      },
+      {
+        "season" => "2017",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=23" },
+          { "name" => "Landesliga Gruppe A", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=24" },
+          { "name" => "Landesliga Gruppe B", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=25" },
+        ]
+      },
+      {
+        "season" => "2016",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=15" },
+          { "name" => "Landesliga Gruppe A", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=17" },
+          { "name" => "Landesliga Gruppe B", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=18" },
+        ]
+      },
+      {
+        "season" => "2015",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=12" },
+          { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=13" },
+          { "name" => "Rookieliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=14" },
+        ]
+      },
+      {
+        "season" => "2014",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=10" },
+          { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=11" },
+        ]
+      },
+      {
+        "season" => "2013",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=9" },
+          { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=8" },
         ]
       }
     ]
 
     def self.run
       @agent = Mechanize.new
+      Player.create!(name: "Unbekannter Spieler", external_mtfv_id: 9999999)
 
       SCRAPE_URLS.each do |entry|
         season = Season.find_or_create_by!(name: entry["season"])

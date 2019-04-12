@@ -10,4 +10,8 @@ class Team < ApplicationRecord
   def score_difference
     score - score_against
   end
+
+  def goal_difference
+    goals - goals_against
+  end
 end
