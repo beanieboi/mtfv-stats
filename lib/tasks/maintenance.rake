@@ -29,4 +29,14 @@ namespace :maintenance do
       end
     end
   end
+
+  desc "Populate scores and goals in Players"
+  task populate_teams: :environment do
+    League.all.each do |league|
+      teams.each do |team|
+        PlayerStats.generate(team)
+      end
+    end
+  end
+
 end

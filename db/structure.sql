@@ -97,6 +97,43 @@ ALTER SEQUENCE public.matches_id_seq OWNED BY public.matches.id;
 
 
 --
+-- Name: player_stats; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.player_stats (
+    id bigint NOT NULL,
+    player_id integer NOT NULL,
+    league_id integer NOT NULL,
+    performance_index integer,
+    score integer,
+    score_against integer,
+    goals integer,
+    goals_against integer,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
+-- Name: player_stats_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.player_stats_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: player_stats_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.player_stats_id_seq OWNED BY public.player_stats.id;
+
+
+--
 -- Name: players; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -261,6 +298,13 @@ ALTER TABLE ONLY public.matches ALTER COLUMN id SET DEFAULT nextval('public.matc
 
 
 --
+-- Name: player_stats id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.player_stats ALTER COLUMN id SET DEFAULT nextval('public.player_stats_id_seq'::regclass);
+
+
+--
 -- Name: players id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -310,6 +354,14 @@ ALTER TABLE ONLY public.leagues
 
 ALTER TABLE ONLY public.matches
     ADD CONSTRAINT matches_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: player_stats player_stats_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.player_stats
+    ADD CONSTRAINT player_stats_pkey PRIMARY KEY (id);
 
 
 --
@@ -364,6 +416,7 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190408093206'),
 ('20190408093308'),
 ('20190408093312'),
-('20190408093854');
+('20190408093854'),
+('20190411213202');
 
 

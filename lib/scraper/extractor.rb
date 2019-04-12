@@ -44,7 +44,7 @@ module Scraper
       external_mtfv_match_id = external_mtfv_id_from_link(result_link)
       agent = Mechanize.new
 
-      puts "importing match #{external_mtfv_match_id}"
+      # puts "importing match #{external_mtfv_match_id}"
 
       result_page = agent.get("http://www.mtfv1.de#{result_link}")
       result_page.search('//*/table[3]').search("tr").each do |tr_line|
