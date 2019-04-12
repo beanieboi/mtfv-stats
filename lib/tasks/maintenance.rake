@@ -32,11 +32,10 @@ namespace :maintenance do
 
   desc "Populate scores and goals in Players"
   task populate_teams: :environment do
-    League.all.each do |league|
-      teams.each do |team|
-        PlayerStats.generate(team)
+    Player.find_in_batches do |players|
+      players.each do |player|
+        PlayerStats.generate(player)
       end
     end
   end
-
 end
