@@ -36,6 +36,18 @@ class PlayerStats < ApplicationRecord
     (double_score * 100 / double_total_score).to_i
   end
 
+  def overall_goal_difference
+    overall_goals - overall_goals_against
+  end
+
+  def overall_total_score
+    overall_score + overall_score_against
+  end
+
+  def overall_percentage
+    (overall_score * 100 / overall_total_score).to_i
+  end
+
   def calculate_performance_index
     self.overall_performance_index = begin
       (overall_score * overall_score * 100) / (overall_score + overall_score_against)

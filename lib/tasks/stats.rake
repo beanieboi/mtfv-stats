@@ -8,7 +8,7 @@ namespace :stats do
     puts "creating match stats"
     Match.find_in_batches do |matches|
       matches.each do |match|
-        MatchStats.generate(match)
+        MatchStatsGenerator.generate(match)
       end
     end
   end

@@ -13,6 +13,7 @@
 <% end %>
 
 <%= render partial: "rankings/team", locals: { teams: @teams } %>
+<%= render partial: "rankings/overall", locals: { stat: @overall } %>
 <%= render partial: "rankings/single", locals: { stat: @singles } %>
 <%= render partial: "rankings/double", locals: { stat: @doubles } %>
 <%= render partial: "rankings/pair", locals: { stat: @pairs } %>

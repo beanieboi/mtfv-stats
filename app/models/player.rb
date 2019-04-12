@@ -19,23 +19,23 @@ class Player < ApplicationRecord
   end
 
   def double_results_in_league(league)
-    home_results_double.or(away_results_double)
+    home_results_double_in_league(league).or(away_results_double_in_league(league))
   end
 
   def away_results_in_league(league)
-    away_results_single.or(away_results_double)
+    away_results_single_in_league(league).or(away_results_double_in_league(league))
   end
 
   def home_results_in_league(league)
-    home_results_single.or(home_results_double)
+    home_results_single_in_league(league).or(home_results_double_in_league(league))
   end
 
   def away_results_in_league(league)
-    away_results_single.or(away_results_double)
+    away_results_single_in_league(league).or(away_results_double_in_league(league))
   end
 
   def home_results_in_league(league)
-    home_results_single.or(home_results_double)
+    home_results_single_in_league(league).or(home_results_double_in_league(league))
   end
 
   def leagues
