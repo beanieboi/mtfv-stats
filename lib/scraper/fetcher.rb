@@ -1,15 +1,15 @@
 module Scraper
   class Fetcher
     SCRAPE_URLS = [
-      # {
-      #   "season" => "2019",
-      #   "leagues" => [
-      #     { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=34" },
-      #     { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=35" },
-      #     { "name" => "Landesklasse 1", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=37" },
-      #     { "name" => "Landesklasse 2", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=39" },
-      #   ]
-      # },
+      {
+        "season" => "2019",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=34" },
+          { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=35" },
+          { "name" => "Landesklasse 1", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=37" },
+          { "name" => "Landesklasse 2", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=39" },
+        ]
+      },
       {
         "season" => "2018",
         "leagues" => [
@@ -58,11 +58,13 @@ module Scraper
       }
     ]
 
-    def self.run
+    def self.run(year)
       @agent = Mechanize.new
       Player.create!(name: "Unbekannter Spieler", external_mtfv_id: 9999999)
 
       SCRAPE_URLS.each do |entry|
+        next if entry["season"] != year
+
         season = Season.find_or_create_by!(name: entry["season"])
 
         entry["leagues"].each do |league_entry|
