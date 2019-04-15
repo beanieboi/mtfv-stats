@@ -1,5 +1,6 @@
 class PlayerStats < ApplicationRecord
   belongs_to :player
+  belongs_to :league
 
   before_save :calculate_performance_index
 

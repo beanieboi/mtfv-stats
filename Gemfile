@@ -6,9 +6,11 @@ ruby '2.6.2'
 gem 'rails', '~> 6.0.0.beta3'
 gem 'pg'
 gem 'puma', '~> 3.11'
+gem "scenic"
+
 gem 'sass-rails', '~> 5.0'
 gem "bulma-rails", "~> 0.7.4"
-gem "scenic"
+gem 'chart-js-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.1', require: false

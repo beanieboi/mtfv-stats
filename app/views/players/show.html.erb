@@ -1,0 +1,16 @@
+<%= @player.name %>
+<%= render partial: "players/rankings/single", locals: { stat: @player.stats } %>
+
+<div style="width:75%;">
+  <canvas id="canvas"></canvas>
+</div>
+<script>
+  window.onload = function() {
+    var ctx = document.getElementById('canvas').getContext('2d');
+    var myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: [1,2,3],
+      options: {}
+    });
+  };
+</script>
