@@ -60,7 +60,8 @@ module Scraper
 
     def self.run(year)
       @agent = Mechanize.new
-      Player.create!(name: "Unbekannter Spieler", external_mtfv_id: 9999999)
+      Player.create!(name: "Unbekannter Spieler 1", external_mtfv_id: 9999999)
+      Player.create!(name: "Unbekannter Spieler 2", external_mtfv_id: 9999998)
 
       SCRAPE_URLS.each do |entry|
         next if entry["season"] != year

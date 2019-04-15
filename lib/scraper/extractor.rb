@@ -92,7 +92,7 @@ module Scraper
         external_mtfv_player_two_id = external_mtfv_id_from_link(td_line.children[4].attr("href"))
         name_player_two = td_line.children[4].text.strip
       else
-        external_mtfv_player_two_id = 9999999
+        external_mtfv_player_two_id = 9999998
         name_player_two = "Unbekannt"
       end
 
