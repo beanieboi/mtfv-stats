@@ -60,6 +60,9 @@ module Scraper
           home_player_ids = double_player_id_from_td(tr_line.search("td")[4])
           home_goals, away_goals = score_from_td(tr_line.search("td")[5])
           away_player_ids = double_player_id_from_td(tr_line.search("td")[6])
+
+          create_double_pair(home_player_ids)
+          create_double_pair(away_player_ids)
         # regular single game
         else
           home_player_ids = single_player_id_from_td(tr_line.search("td")[3])
@@ -125,6 +128,10 @@ module Scraper
       return if link.nil?
 
       CGI::parse(link)["id"].first.to_i
+    end
+
+    def self.create_double_pair(player_ids)
+      DoublePair.find_or_create_by!(player_ids: player_ids)
     end
 
     def self.create_or_find_player(external_mtfv_id, name)
