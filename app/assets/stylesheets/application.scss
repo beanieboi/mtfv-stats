@@ -1,1 +1,19 @@
 @import "bulma";
+
+
+a:link, a:active, a:hover, a:visited {
+  color: #009e6c;
+}
+
+a.up-arrow {
+  padding: 5px 20px;
+  float: right;
+  i {
+    border: solid #4a4a4a;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+}

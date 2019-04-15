@@ -1,5 +1,5 @@
-<div>Beste Einzelspieler</div>
-<table class="table is-striped is-hoverable">
+<h1 id="single" class="subtitle">Beste Einzelspieler</h1>
+<table class="table is-striped is-fullwidth">
   <thead>
     <tr>
       <th><abbr title="Platz">Pl</abbr></th>
@@ -17,16 +17,16 @@
   <tbody>
     <% local_assigns[:stat].each_with_index do |stat, index| %>
       <tr>
-        <th><%= index + 1%></th>
-        <th><%= stat.player.name %></th>
-        <th><%= stat.single_performance_index %></th>
-        <th><%= stat.single_total_score %></th>
-        <th><%= stat.single_score %></th>
-        <th><%= stat.single_score_against %></th>
-        <th><%= stat.single_percentage %>%</th>
-        <th><%= stat.single_goals %></th>
-        <th><%= stat.single_goals_against %></th>
-        <th><%= stat.single_goal_difference %></th>
+        <td><%= index + 1%></td>
+        <td><%= link_to(stat.player.name, player_path(stat.player)) %></td>
+        <td><%= stat.single_performance_index %></td>
+        <td><%= stat.single_total_score %></td>
+        <td><%= stat.single_score %></td>
+        <td><%= stat.single_score_against %></td>
+        <td><%= stat.single_percentage %>%</td>
+        <td><%= stat.single_goals %></td>
+        <td><%= stat.single_goals_against %></td>
+        <td><%= stat.single_goal_difference %></td>
     <% end %>
   </tbody>
 </table>

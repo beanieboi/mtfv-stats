@@ -1,4 +1,56 @@
-<%= render partial: "rankings/overall", locals: { stat: @overall } %>
-<%= render partial: "rankings/single", locals: { stat: @singles } %>
-<%= render partial: "rankings/double", locals: { stat: @doubles } %>
-<%= render partial: "rankings/pair", locals: { stat: @pairs } %>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        Lifetime Stats
+      </h1>
+    </div>
+  </div>
+
+  <div class="hero-foot">
+    <nav class="tabs">
+      <div class="container">
+        <ul>
+          <li><a href="#overall">Beste Gesamtspieler</a></li>
+          <li><a href="#single">Beste Einzelspieler</a></li>
+          <li><a href="#double">Beste Doppelspieler</a></li>
+          <li><a href="#pair">Beste Doppelpaare</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <div class="columns">
+    <div class="column">
+      <a href="#top" class="up-arrow"><i></i></a>
+    </div>
+    <div class="column"><%= render partial: "rankings/overall", locals: { stat: @overall } %></div>
+    <div class="column"></div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <a href="#top" class="up-arrow"><i></i></a>
+    </div>
+    <div class="column"><%= render partial: "rankings/single", locals: { stat: @singles } %></div>
+    <div class="column"></div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <a href="#top" class="up-arrow"><i></i></a>
+    </div>
+    <div class="column"><%= render partial: "rankings/double", locals: { stat: @doubles } %></div>
+    <div class="column"></div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <a href="#top" class="up-arrow"><i></i></a>
+    </div>
+    <div class="column"><%= render partial: "rankings/pair", locals: { stat: @pairs } %></div>
+    <div class="column"></div>
+  </div>
+</section>
+
