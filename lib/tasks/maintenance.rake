@@ -22,5 +22,12 @@ namespace :maintenance do
         raise StandardError, "Result #{result.id} has invalid player pairs"
       end
     end
+
+    DoubleStats.find_in_batches do |stats|
+      stats.each do |stat|
+        next if stat.player_ids.count == 2
+        raise StandardError, "DoubleStats #{stat.id} has invalid player count"
+      end
+    end
   end
 end
