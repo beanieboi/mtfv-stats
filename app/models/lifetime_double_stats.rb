@@ -1,6 +1,6 @@
 class LifetimeDoubleStats < ApplicationRecord
   def players
-    Player.where("id IN (?)", player_ids)
+    @players ||= Player.where("id IN (?)", player_ids)
   end
 
   def goal_difference
