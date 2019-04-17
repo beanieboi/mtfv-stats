@@ -131,7 +131,7 @@ module Scraper
     end
 
     def self.create_double_pair(player_ids)
-      DoublePair.find_or_create_by!(player_ids: player_ids)
+      # DoublePair.find_or_create_by!(player_ids: player_ids)
     end
 
     def self.create_or_find_player(external_mtfv_id, name)
