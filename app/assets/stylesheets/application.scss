@@ -30,3 +30,13 @@ a.up-arrow {
 tr td:nth-child(2) {
   width: 30%;
 }
+
+#search {
+  display: inline-block;
+  width: 400px;
+  margin-bottom: 20px;
+}
+
+.hidden {
+  display: none;
+}

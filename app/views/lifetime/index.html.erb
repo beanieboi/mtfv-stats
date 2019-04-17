@@ -25,7 +25,10 @@
 </section>
 
 <section class="section">
+  <input id="search" class="input" type="text" placeholder="Suche">
+
   <a href="#top" class="up-arrow"><i></i><span>UP</span></a>
+
   <div class="columns">
     <div class="column"><%= render partial: "rankings/overall", locals: { stat: @overall } %></div>
   </div>
@@ -43,3 +46,8 @@
   </div>
 </section>
 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    initSearch("search");
+  });
+</script>
