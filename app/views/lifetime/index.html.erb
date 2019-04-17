@@ -1,3 +1,7 @@
+<section class="hero is-primary is-small is-bold">
+  <div class="hero-head">
+    <%= render partial:"shared/navigation" %>
+  </div>
   <div class="hero-body">
     <div class="container has-text-centered">
       <h1 class="title">
@@ -21,36 +25,21 @@
 </section>
 
 <section class="section">
+  <a href="#top" class="up-arrow"><i></i><span>UP</span></a>
   <div class="columns">
-    <div class="column">
-      <a href="#top" class="up-arrow"><i></i></a>
-    </div>
     <div class="column"><%= render partial: "rankings/overall", locals: { stat: @overall } %></div>
-    <div class="column"></div>
   </div>
 
   <div class="columns">
-    <div class="column">
-      <a href="#top" class="up-arrow"><i></i></a>
-    </div>
     <div class="column"><%= render partial: "rankings/single", locals: { stat: @singles } %></div>
-    <div class="column"></div>
   </div>
 
   <div class="columns">
-    <div class="column">
-      <a href="#top" class="up-arrow"><i></i></a>
-    </div>
     <div class="column"><%= render partial: "rankings/double", locals: { stat: @doubles } %></div>
-    <div class="column"></div>
   </div>
 
   <div class="columns">
-    <div class="column">
-      <a href="#top" class="up-arrow"><i></i></a>
-    </div>
     <div class="column"><%= render partial: "rankings/pair", locals: { stat: @pairs } %></div>
-    <div class="column"></div>
   </div>
 </section>
 

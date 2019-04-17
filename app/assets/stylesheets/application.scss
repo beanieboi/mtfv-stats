@@ -7,7 +7,10 @@ a:link, a:active, a:hover, a:visited {
 
 a.up-arrow {
   padding: 5px 20px;
-  float: right;
+  position: fixed;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0.7);
+  text-align: center;
   i {
     border: solid #4a4a4a;
     border-width: 0 3px 3px 0;
@@ -16,4 +19,14 @@ a.up-arrow {
     transform: rotate(-135deg);
     -webkit-transform: rotate(-135deg);
   }
+  span {
+    display: block;
+    color: #4a4a4a;
+    font-size: 11px;
+    margin-top: -7px;
+  }
+}
+
+tr td:nth-child(2) {
+  width: 30%;
 }

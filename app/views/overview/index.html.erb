@@ -1,19 +1,29 @@
-<%= form_tag("/", method: "get") do %>
-  <div class="field">
-    <div class="control">
-      <div class="select">
-        <%= select_tag "season_id", options_from_collection_for_select(@seasons, :id, :name, params[:season_id]) %>
-      </div>
-      <div class="select">
-        <%= select_tag "league_id", options_from_collection_for_select(@leagues, :id, :name, params[:league_id]) %>
-      </div>
-      <button class="button is-link">Anzeigen</button>
-    </div>
+<section class="hero is-primary is-small is-bold">
+  <div class="hero-head">
+    <%= render partial:"shared/navigation" %>
   </div>
-<% end %>
 
-<%= render partial: "rankings/team", locals: { teams: @teams } %>
-<%= render partial: "rankings/overall", locals: { stat: @overall } %>
-<%= render partial: "rankings/single", locals: { stat: @singles } %>
-<%= render partial: "rankings/double", locals: { stat: @doubles } %>
-<%= render partial: "rankings/pair", locals: { stat: @pairs } %>
+  <div class="hero-body">
+    <%= form_tag("/", method: "get") do %>
+      <div class="field">
+        <div class="control">
+          <div class="select">
+            <%= select_tag "season_id", options_from_collection_for_select(@seasons, :id, :name, params[:season_id]) %>
+          </div>
+          <div class="select">
+            <%= select_tag "league_id", options_from_collection_for_select(@leagues, :id, :name, params[:league_id]) %>
+          </div>
+          <button class="button is-link">Anzeigen</button>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
+
+<section class="section">
+  <%= render partial: "rankings/team", locals: { teams: @teams } %>
+  <%= render partial: "rankings/overall", locals: { stat: @overall } %>
+  <%= render partial: "rankings/single", locals: { stat: @singles } %>
+  <%= render partial: "rankings/double", locals: { stat: @doubles } %>
+  <%= render partial: "rankings/pair", locals: { stat: @pairs } %>
+</section>
