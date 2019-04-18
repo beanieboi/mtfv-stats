@@ -2,6 +2,10 @@ class Player < ApplicationRecord
   belongs_to :team, optional: true
   has_many :stats, class_name: "PlayerStats"
 
+  def double_stats
+    DoubleStats.for_player(self)
+  end
+
   def home_results_single_in_league(league)
     Result.singles.in_league(league).for_home_player(self)
   end

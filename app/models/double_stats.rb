@@ -1,5 +1,10 @@
 class DoubleStats < ApplicationRecord
+  belongs_to :league
   before_save :calculate_performance_index
+
+  def self.for_player(player)
+    where("player_ids @> ARRAY[?]", player.id).order(:league_id)
+  end
 
   def players
     Player.where("id IN (?)", player_ids)
@@ -15,6 +20,11 @@ class DoubleStats < ApplicationRecord
 
   def percentage
     (overall_score * 100 / total_score).to_i
+  end
+
+  def position
+    all = DoubleStats.where(league_id: league_id).order("overall_performance_index DESC")
+    all.find_index { |s| s.id == id } + 1
   end
 
   def calculate_performance_index

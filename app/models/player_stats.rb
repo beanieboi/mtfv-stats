@@ -52,6 +52,11 @@ class PlayerStats < ApplicationRecord
     (overall_score * 100 / overall_total_score).to_i
   end
 
+  def position(order)
+    all = PlayerStats.where(league_id: league_id).rank_order(order)
+    all.find_index { |s| s.player_id == player_id } + 1
+  end
+
   def calculate_performance_index
     self.overall_performance_index = begin
       (overall_score * overall_score * 100) / (overall_score + overall_score_against)

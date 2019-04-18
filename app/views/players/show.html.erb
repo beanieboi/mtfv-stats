@@ -1,16 +1,45 @@
-<%= @player.name %>
-<%= render partial: "players/rankings/single", locals: { stats: @player.stats } %>
+<section class="hero is-primary is-small is-bold">
+  <div class="hero-head">
+    <%= render partial:"shared/navigation" %>
+  </div>
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title">
+        <h1 id="single" class="title"><%= @player.name %></h1>
+      </h1>
+    </div>
+  </div>
 
-<div style="width:75%;">
-  <canvas id="canvas"></canvas>
-</div>
-<script>
-  window.onload = function() {
-    var ctx = document.getElementById('canvas').getContext('2d');
-    var myLineChart = new Chart(ctx, {
-      type: 'line',
-      data: [1,2,3],
-      options: {}
-    });
-  };
-</script>
+  <div class="hero-foot">
+    <nav class="tabs">
+      <div class="container">
+        <ul>
+          <li><a href="#overall">Gesamtspiele</a></li>
+          <li><a href="#single">Einzelspiele</a></li>
+          <li><a href="#double">Doppelspiele</a></li>
+          <li><a href="#pair">Doppelpaare</a></li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+</section>
+
+<section class="section">
+  <a href="#top" class="up-arrow"><i></i><span>UP</span></a>
+
+  <div class="columns">
+    <div class="column"><%= render partial: "players/rankings/overall", locals: { stats: @player.stats } %></div>
+  </div>
+
+  <div class="columns">
+    <div class="column"><%= render partial: "players/rankings/single", locals: { stats: @player.stats } %></div>
+  </div>
+
+  <div class="columns">
+    <div class="column"><%= render partial: "players/rankings/double", locals: { stats: @player.stats } %></div>
+  </div>
+
+  <div class="columns">
+    <div class="column"><%= render partial: "players/rankings/pair", locals: { stats: @player.double_stats } %></div>
+  </div>
+</section>

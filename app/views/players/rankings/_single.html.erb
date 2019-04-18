@@ -1,0 +1,32 @@
+<h1 id="single" class="subtitle">Einzelspiele</h1>
+<table class="table is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th><abbr title="Platz">Pl</abbr></th>
+      <th>Liga</th>
+      <th><abbr title="Leistungsindex">LI</abbr></th>
+      <th><abbr title="Spiele">S</abbr></th>
+      <th><abbr title="Spiele gewonnen">SP+</abbr></th>
+      <th><abbr title="Spiele verloren">SP-</abbr></th>
+      <th><abbr title="Quote">Q</abbr></th>
+      <th><abbr title="Tore">T</abbr></th>
+      <th><abbr title="Gegentoren">GT</abbr></th>
+      <th><abbr title="Tordifferenz">TD</abbr></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% local_assigns[:stats].each do |stat| %>
+      <tr>
+        <th><%= stat.position("single") %></th>
+        <td><%= stat.league.name %> <%= stat.league.season.name %></td>
+        <td><%= stat.single_performance_index %></td>
+        <td><%= stat.single_total_score %></td>
+        <td><%= stat.single_score %></td>
+        <td><%= stat.single_score_against %></td>
+        <td><%= stat.single_percentage %>%</td>
+        <td><%= stat.single_goals %></td>
+        <td><%= stat.single_goals_against %></td>
+        <td><%= stat.single_goal_difference %></td>
+    <% end %>
+  </tbody>
+</table>
