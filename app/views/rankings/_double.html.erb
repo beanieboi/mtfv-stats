@@ -1,32 +1,38 @@
 <h1 id="double" class="subtitle">Beste Doppelspieler</h1>
-<table class="table is-striped is-fullwidth">
-  <thead>
-    <tr>
-      <th><abbr title="Platz">Pl</abbr></th>
-      <th>Name</th>
-      <th><abbr title="Leistungsindex">LI</abbr></th>
-      <th><abbr title="Spiele">S</abbr></th>
-      <th><abbr title="Spiele gewonnen">SP+</abbr></th>
-      <th><abbr title="Spiele verloren">SP-</abbr></th>
-      <th><abbr title="Quote">Q</abbr></th>
-      <th><abbr title="Tore">T</abbr></th>
-      <th><abbr title="Gegentoren">GT</abbr></th>
-      <th><abbr title="Tordifferenz">TD</abbr></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% local_assigns[:stat].each_with_index do |stat, index| %>
-      <tr>
-        <td><%= index + 1%></td>
-        <td><%= link_to(stat.player.name, player_path(stat.player)) %></td>
-        <td><%= stat.double_performance_index %></td>
-        <td><%= stat.double_total_score %></td>
-        <td><%= stat.double_score %></td>
-        <td><%= stat.double_score_against %></td>
-        <td><%= stat.double_percentage %>%</td>
-        <td><%= stat.double_goals %></td>
-        <td><%= stat.double_goals_against %></td>
-        <td><%= stat.double_goal_difference %></td>
-    <% end %>
-  </tbody>
-</table>
+<label class="expandable-table">
+  <input type="checkbox"></input>
+  <span>Mehr anzeigen</span>
+  <div>
+    <table class="table is-striped is-fullwidth">
+      <thead>
+        <tr>
+          <th><abbr title="Platz">Pl</abbr></th>
+          <th>Name</th>
+          <th><abbr title="Leistungsindex">LI</abbr></th>
+          <th><abbr title="Spiele">S</abbr></th>
+          <th><abbr title="Spiele gewonnen">SP+</abbr></th>
+          <th><abbr title="Spiele verloren">SP-</abbr></th>
+          <th><abbr title="Quote">Q</abbr></th>
+          <th><abbr title="Tore">T</abbr></th>
+          <th><abbr title="Gegentoren">GT</abbr></th>
+          <th><abbr title="Tordifferenz">TD</abbr></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% local_assigns[:stat].each_with_index do |stat, index| %>
+          <tr>
+            <td><%= index + 1%></td>
+            <td><%= link_to(stat.player.name, player_path(stat.player)) %></td>
+            <td><%= stat.double_performance_index %></td>
+            <td><%= stat.double_total_score %></td>
+            <td><%= stat.double_score %></td>
+            <td><%= stat.double_score_against %></td>
+            <td><%= stat.double_percentage %>%</td>
+            <td><%= stat.double_goals %></td>
+            <td><%= stat.double_goals_against %></td>
+            <td><%= stat.double_goal_difference %></td>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</label>
