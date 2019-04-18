@@ -15,6 +15,7 @@ class LifetimePlayerStats < ApplicationRecord
   end
 
   def single_percentage
+    return 0 if single_total_score == 0
     (single_score * 100 / single_total_score).to_i
   end
 
@@ -27,6 +28,7 @@ class LifetimePlayerStats < ApplicationRecord
   end
 
   def double_percentage
+    return 0 if double_total_score == 0
     (double_score * 100 / double_total_score).to_i
   end
 
@@ -39,6 +41,7 @@ class LifetimePlayerStats < ApplicationRecord
   end
 
   def overall_percentage
+    return 0 if overall_total_score == 0
     (overall_score * 100 / overall_total_score).to_i
   end
 

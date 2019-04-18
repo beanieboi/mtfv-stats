@@ -1,6 +1,10 @@
 class LifetimeDoubleStats < ApplicationRecord
+  # this is for performance reasons
   def players
-    @players ||= Player.where("id IN (?)", player_ids)
+    self.player_data.split("|||").map do |player|
+      id, name = player.split("---")
+      PlayerBox.new(id: id, name: name)
+    end
   end
 
   def goal_difference
