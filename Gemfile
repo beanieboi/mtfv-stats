@@ -9,7 +9,7 @@ gem 'puma', '~> 3.11'
 gem "scenic"
 
 gem 'sass-rails', '~> 5.0'
-gem "bulma-rails", "~> 0.7.4"
+gem 'bulma-rails', "~> 0.7.4"
 gem 'chart-js-rails'
 
 # Reduces boot times through caching; required in config/boot.rb
