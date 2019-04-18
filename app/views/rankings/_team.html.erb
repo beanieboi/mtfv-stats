@@ -21,7 +21,7 @@
     <% local_assigns[:teams].each_with_index do |team, index| %>
       <tr>
         <td><%= index + 1%></td>
-        <td><%= link_to(team.name, team_path(team)) %></td>
+        <td><%= team.name %></td>
         <td><%= team.matches.count %></td>
         <td><%= team.matches_won %></td>
         <td><%= team.matches_draw %></td>
