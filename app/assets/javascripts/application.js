@@ -72,7 +72,7 @@ var initSearch = function(inputId) {
   expandableTables = document.querySelectorAll(".expandable-table");
 
   if (searchInput) {
-    searchInput.addEventListener("input", debounce(search, 1000));
+    searchInput.addEventListener("input", debounce(search, 500));
   } else {
     console.log("Search was not initialized. ID does not exist");
   }
