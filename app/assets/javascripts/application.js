@@ -81,10 +81,39 @@ var initSearch = function(inputId) {
     if (clearSearchButton) {
       clearSearchButton.addEventListener("click", function() {
         searchInput.value = "";
-        search("");
+        search(searchInput.value);
       });
     }
   } else {
     console.log("Search was not initialized. ID does not exist");
+  }
+};
+
+var updateLeagueDropdown = function(seasonDropdownId, leagueDropdownId) {
+  var seasonDropdown = document.getElementById(seasonDropdownId);
+  var leagueDropdown = document.getElementById(leagueDropdownId);
+
+  function updateLeagueDropdown() {
+    var text = seasonDropdown.options[seasonDropdown.selectedIndex].text;
+    var leagueOptions = leagueDropdown.options;
+    var firstOptionMatch;
+
+    for (option of leagueOptions) {
+      if (text === option.getAttribute("data-season")) {
+        option.classList.remove("hidden");
+        if (!firstOptionMatch) {
+          firstOptionMatch = option.value;
+        }
+      } else {
+        option.classList.add("hidden");
+      }
+    }
+    leagueDropdown.value = firstOptionMatch;
+  }
+
+  if (seasonDropdown && leagueDropdown) {
+    updateLeagueDropdown();
+
+    seasonDropdown.addEventListener("change", updateLeagueDropdown);
   }
 };

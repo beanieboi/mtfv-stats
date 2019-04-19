@@ -31,3 +31,9 @@
   <%= render partial: "rankings/double", locals: { stat: @doubles } %>
   <%= render partial: "rankings/pair", locals: { stat: @pairs } %>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    updateLeagueDropdown("season_id", "league_id");
+  });
+</script>
