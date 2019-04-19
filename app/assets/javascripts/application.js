@@ -4,6 +4,7 @@ var initSearch = function(inputId) {
   var searchInput;
   var searchValue;
   var tableRows;
+  var expandableTables;
 
   // Credit David Walsh (https://davidwalsh.name/javascript-debounce-function)
 
@@ -43,6 +44,10 @@ var initSearch = function(inputId) {
     searchValue = newSearchValue;
 
     if (searchValue === "") {
+      expandableTables.forEach(function(table) {
+        table.classList.add("expandable-table");
+      });
+
       tableRows.forEach(function(row) {
         row.classList.remove("hidden");
       });
@@ -56,10 +61,15 @@ var initSearch = function(inputId) {
         row.classList.remove("hidden");
       }
     });
+
+    expandableTables.forEach(function(table) {
+      table.classList.remove("expandable-table");
+    });
   }
 
   searchInput = document.getElementById(inputId);
   tableRows = document.querySelectorAll("tbody tr");
+  expandableTables = document.querySelectorAll(".expandable-table");
 
   if (searchInput) {
     searchInput.addEventListener("input", debounce(search, 1000));
