@@ -57,7 +57,7 @@ table tr td:nth-child(2) {
   width: 30%;
 }
 
-label.expandable-table {
+label.expandable-table--active {
   position: relative;
   display: inline-block;
   width: 100%;
@@ -100,6 +100,12 @@ label.expandable-table {
       content: "Weniger ";
       display: inline;
     }
+  }
+}
+
+label.expandable-table:not(.expandable-table--active) {
+  input, span {
+    display: none;
   }
 }
 

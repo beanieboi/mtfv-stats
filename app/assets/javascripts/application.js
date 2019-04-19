@@ -45,7 +45,7 @@ var initSearch = function(inputId) {
 
     if (searchValue === "") {
       expandableTables.forEach(function(table) {
-        table.classList.add("expandable-table");
+        table.classList.add("expandable-table--active");
       });
 
       tableRows.forEach(function(row) {
@@ -63,7 +63,7 @@ var initSearch = function(inputId) {
     });
 
     expandableTables.forEach(function(table) {
-      table.classList.remove("expandable-table");
+      table.classList.remove("expandable-table--active");
     });
   }
 
