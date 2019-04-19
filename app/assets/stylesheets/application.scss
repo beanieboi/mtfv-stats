@@ -58,19 +58,21 @@ table tr td:nth-child(2) {
 }
 
 label.expandable-table {
-  display: block;
   position: relative;
+  display: inline-block;
   width: 100%;
 
   span {
+    &:before {
+      content: "Mehr ";
+      display: inline;
+    }
     cursor: pointer;
     color: #45a70d;
     position: absolute;
-    bottom: 0;
+    bottom: -40px;
     width: 100%;
     display: block;
-    z-index: 10;
-    background: #ffffff;
     text-align: center;
     font-size: 13px;
     padding: 10px;
@@ -84,18 +86,20 @@ label.expandable-table {
     display: none;
   }
 
-  input ~ div {
-    display: block;
-    overflow: hidden;
-    height: 245px;
+  input:not(:checked) ~ table tbody {
+    tr:nth-child(n) {
+      display: none;
+    }
+    tr:nth-child(1), tr:nth-child(2), tr:nth-child(3) {
+      display: table-row;
+    }
   }
 
   input:checked ~ span {
-    display: none;
-  }
-
-  input:checked ~ div {
-    height: auto;
+    &:before {
+      content: "Weniger ";
+      display: inline;
+    }
   }
 }
 

@@ -1,38 +1,36 @@
 <h1 id="pair" class="subtitle">Beste Doppelpaare</h1>
 <label class="expandable-table">
   <input type="checkbox"></input>
-  <span>Mehr anzeigen</span>
-  <div>
-    <table class="table is-striped is-fullwidth">
-      <thead>
+  <span>anzeigen</span>
+  <table class="table is-striped is-fullwidth">
+    <thead>
+      <tr>
+        <th><abbr title="Platz">Pl</abbr></th>
+        <th>Name</th>
+        <th><abbr title="Leistungsindex">LI</abbr></th>
+        <th><abbr title="Spiele">S</abbr></th>
+        <th><abbr title="Spiele gewonnen">SP+</abbr></th>
+        <th><abbr title="Spiele verloren">SP-</abbr></th>
+        <th><abbr title="Quote">Q</abbr></th>
+        <th><abbr title="Tore">T</abbr></th>
+        <th><abbr title="Gegentoren">GT</abbr></th>
+        <th><abbr title="Tordifferenz">TD</abbr></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% local_assigns[:stat].each_with_index do |stat, index| %>
         <tr>
-          <th><abbr title="Platz">Pl</abbr></th>
-          <th>Name</th>
-          <th><abbr title="Leistungsindex">LI</abbr></th>
-          <th><abbr title="Spiele">S</abbr></th>
-          <th><abbr title="Spiele gewonnen">SP+</abbr></th>
-          <th><abbr title="Spiele verloren">SP-</abbr></th>
-          <th><abbr title="Quote">Q</abbr></th>
-          <th><abbr title="Tore">T</abbr></th>
-          <th><abbr title="Gegentoren">GT</abbr></th>
-          <th><abbr title="Tordifferenz">TD</abbr></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% local_assigns[:stat].each_with_index do |stat, index| %>
-          <tr>
-            <td><%= index + 1%></td>
-            <td><%= link_to(stat.players[0].name, player_path(stat.players[0])) %> und <%= link_to(stat.players[1].name, player_path(stat.players[1])) %> </td>
-            <td><%= stat.overall_performance_index %></td>
-            <td><%= stat.total_score %></td>
-            <td><%= stat.overall_score %></td>
-            <td><%= stat.overall_score_against %></td>
-            <td><%= stat.percentage %>%</td>
-            <td><%= stat.overall_goals %></td>
-            <td><%= stat.overall_goals_against %></td>
-            <td><%= stat.goal_difference %></td>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+          <td><%= index + 1%></td>
+          <td><%= link_to(stat.players[0].name, player_path(stat.players[0])) %> und <%= link_to(stat.players[1].name, player_path(stat.players[1])) %> </td>
+          <td><%= stat.overall_performance_index %></td>
+          <td><%= stat.total_score %></td>
+          <td><%= stat.overall_score %></td>
+          <td><%= stat.overall_score_against %></td>
+          <td><%= stat.percentage %>%</td>
+          <td><%= stat.overall_goals %></td>
+          <td><%= stat.overall_goals_against %></td>
+          <td><%= stat.goal_difference %></td>
+      <% end %>
+    </tbody>
+  </table>
 </label>
