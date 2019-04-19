@@ -3,6 +3,7 @@
 var initSearch = function(inputId) {
   var searchInput;
   var searchValue;
+  var clearSearchButton;
   var tableRows;
   var expandableTables;
 
@@ -34,9 +35,11 @@ var initSearch = function(inputId) {
     };
   }
 
-  function search(e) {
-    var newSearchValue = e.srcElement.value.trim().toLowerCase();
+  function searchHandler(e) {
+    search(e.srcElement.value.trim().toLowerCase());
+  }
 
+  function search(newSearchValue) {
     if (searchValue === newSearchValue) {
       return;
     }
@@ -68,11 +71,19 @@ var initSearch = function(inputId) {
   }
 
   searchInput = document.getElementById(inputId);
+  clearSearchButton = document.getElementById("clearSearch");
   tableRows = document.querySelectorAll("tbody tr");
   expandableTables = document.querySelectorAll(".expandable-table");
 
   if (searchInput) {
-    searchInput.addEventListener("input", debounce(search, 1000));
+    searchInput.addEventListener("input", debounce(searchHandler, 1000));
+
+    if (clearSearchButton) {
+      clearSearchButton.addEventListener("click", function() {
+        searchInput.value = "";
+        search("");
+      });
+    }
   } else {
     console.log("Search was not initialized. ID does not exist");
   }
