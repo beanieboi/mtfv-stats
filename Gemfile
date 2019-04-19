@@ -6,7 +6,8 @@ ruby '2.6.2'
 gem 'rails', '~> 6.0.0.beta3'
 gem 'pg'
 gem 'puma', '~> 3.11'
-gem "scenic"
+gem 'barnes' # Heroku Ruby Metrics
+gem 'scenic'
 
 gem 'sass-rails', '~> 5.0'
 gem 'bulma-rails', "~> 0.7.4"

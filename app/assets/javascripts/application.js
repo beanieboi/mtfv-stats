@@ -76,7 +76,7 @@ var initSearch = function(inputId) {
   expandableTables = document.querySelectorAll(".expandable-table");
 
   if (searchInput) {
-    searchInput.addEventListener("input", debounce(searchHandler, 1000));
+    searchInput.addEventListener("input", debounce(searchHandler, 500));
 
     if (clearSearchButton) {
       clearSearchButton.addEventListener("click", function() {
