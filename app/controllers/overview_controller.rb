@@ -1,8 +1,5 @@
 class OverviewController < ApplicationController
   def index
-    @seasons = Season.all
-    @season = Season.find(season_id)
-    @leagues = @season.leagues
     @league = League.find(league_id)
     @teams = @league.rankings
     @singles = PlayerStats.where(league_id: league_id).includes(:player).rank_order("single")
@@ -12,10 +9,6 @@ class OverviewController < ApplicationController
   end
 
   def league_id
-    params[:league_id] || @season.leagues.first.id
-  end
-
-  def season_id
-    params[:season_id] || Season.first.id
+    params[:league_id] || League.first.id
   end
 end
