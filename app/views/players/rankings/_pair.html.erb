@@ -20,7 +20,7 @@
       <tr>
         <th><%= stat.position %></th>
         <td><%= stat.league.name %> <%= stat.league.season.name %></td>
-        <td><%= link_to(stat.players[0].name, player_path(stat.players[0])) %> und <%= link_to(stat.players[1].name, player_path(stat.players[1])) %> </td>
+        <td><%= linked_player_names(stat.players) %> </td>
         <td><%= stat.overall_performance_index %></td>
         <td><%= stat.total_score %></td>
         <td><%= stat.overall_score %></td>

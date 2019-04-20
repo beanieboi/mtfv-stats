@@ -21,7 +21,7 @@
       <% local_assigns[:stat].each_with_index do |stat, index| %>
         <tr>
           <td><%= index + 1%></td>
-          <td><%= link_to(stat.players.first.name, player_path(stat.players.first.id)) %> und <%= link_to(stat.players.last.name, player_path(stat.players.last.id)) %> </td>
+          <td><%= linked_player_names(stat.players) %> </td>
           <td><%= stat.overall_performance_index %></td>
           <td><%= stat.total_score %></td>
           <td><%= stat.overall_score %></td>
