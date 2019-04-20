@@ -17,6 +17,8 @@
         <li><a href="#single">Einzelspiele</a></li>
         <li><a href="#double">Doppelspiele</a></li>
         <li><a href="#pair">Doppelpaare</a></li>
+        <li><a href="#clutch-win">Knapp gewonnen</a></li>
+        <li><a href="#clutch-loss">Knapp verloren</a></li>
       </ul>
     </nav>
   </div>
@@ -39,5 +41,19 @@
 
   <div class="columns">
     <div class="column"><%= render partial: "players/rankings/pair", locals: { stats: @player.double_stats } %></div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <h1 id="clutch-win" class="subtitle">Knapp gewonnen</h1>
+      <%= render partial: 'results', locals: { results: @player.close_results_won } %>
+    </div>
+  </div>
+
+  <div class="columns">
+    <div class="column">
+      <h1 id="clutch-loss" class="subtitle">Knapp verloren</h1>
+      <%= render partial: 'results', locals: { results: @player.close_results_lost } %>
+    </div>
   </div>
 </section>

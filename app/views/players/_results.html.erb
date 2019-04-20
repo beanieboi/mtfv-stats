@@ -1,0 +1,17 @@
+<table class="table is-striped is-hoverable">
+  <thead>
+    <tr>
+      <th>Heim</th>
+      <th></th>
+      <th>Gast</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% local_assigns[:results].each do |result| %>
+      <tr>
+        <td><%= linked_player_names(result.home_players) %></td>
+        <td style="white-space: nowrap;"><%= result.home_goals %> : <%= result.away_goals %></td>
+        <td><%= linked_player_names(result.away_players) %></td>
+    <% end %>
+  </tbody>
+</table>
