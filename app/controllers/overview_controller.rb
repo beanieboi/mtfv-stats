@@ -10,6 +10,6 @@ class OverviewController < ApplicationController
   end
 
   def league_id
-    params[:league_id] || League.first.id
+    params[:league_id] || Season.order("name DESC").first.leagues.first.id
   end
 end
