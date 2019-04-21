@@ -42,8 +42,6 @@ module Scraper
 
     def self.results_from_match_link(result_link)
       external_mtfv_match_id = external_mtfv_id_from_link(result_link)
-      return if Match.where(external_mtfv_id: external_mtfv_match_id).exists?
-
       agent = Mechanize.new
 
       # puts "importing match #{external_mtfv_match_id}"
