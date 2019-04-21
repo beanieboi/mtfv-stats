@@ -52,8 +52,14 @@ module Scraper
       result_page.search('//*/table[3]').search("tr").each do |tr_line|
         next if tr_line.attr("class") != "sectiontableentry2" && tr_line.attr("class") != "sectiontableentry1"
 
+        # no player data
+        # http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=begegnung_spielplan&veranstaltungid=12&id=476
+        if tr_line.search("td")[3].children[1].nil? && !tr_line.search("td")[2].nil?
+          home_player_ids = [0]
+          home_goals, away_goals = score_from_td(tr_line.search("td")[2])
+          away_player_ids = [0]
         # single game default win away
-        if tr_line.search("td")[3].children[1].nil?
+        elsif tr_line.search("td")[3].children[1].nil? && !tr_line.search("td")[4].nil?
           home_player_ids = [0]
           home_goals, away_goals = score_from_td(tr_line.search("td")[4])
           away_player_ids = [0]
