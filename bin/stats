@@ -1,0 +1,4 @@
+#!/bin/sh
+
+bundle exec rails maintenance:all
+bundle exec rails stats:all
