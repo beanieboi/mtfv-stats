@@ -9,7 +9,7 @@
         <div class="control">
           <div class="select">
             <select name="league_id">
-              <%= option_groups_from_collection_for_select(Season.all, :leagues, :name, :id, :name, params[:league_id]) %>
+              <%= option_groups_from_collection_for_select(@seasons, :leagues, :name, :id, :name, params[:league_id]) %>
             </select>
           </div>
           <button class="button is-link">Anzeigen</button>
