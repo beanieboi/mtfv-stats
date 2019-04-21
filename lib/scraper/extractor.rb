@@ -52,7 +52,7 @@ module Scraper
 
         # no player data
         # http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=begegnung_spielplan&veranstaltungid=12&id=476
-        if tr_line.search("td")[3].children[1].nil? && !tr_line.search("td")[2].nil?
+        if tr_line.search("td")[3].children[1].nil? && !tr_line.search("td")[2].text.blank?
           home_player_ids = [0]
           home_goals, away_goals = score_from_td(tr_line.search("td")[2])
           away_player_ids = [0]
