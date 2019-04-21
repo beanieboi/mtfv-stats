@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :teams, only: [:show]
 
   root to: "overview#index"
+
+  # www redirect
+  match '(*any)', to: redirect(subdomain: ''), via: :all, constraints: {subdomain: 'www'}
 end
