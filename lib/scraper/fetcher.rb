@@ -39,7 +39,7 @@ module Scraper
         "leagues" => [
           { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=12" },
           { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=13" },
-          { "name" => "Rookieliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=14" },
+          # { "name" => "Rookieliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=14" },
         ]
       },
       {
