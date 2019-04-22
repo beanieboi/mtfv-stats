@@ -2,6 +2,44 @@ class Player < ApplicationRecord
   belongs_to :team, optional: true
   has_many :stats, class_name: "PlayerStats"
 
+  def close_results_won
+    close_home_results_won.or(close_away_results_won).joins(:match).
+      order("played_at DESC")
+  end
+
+  def close_results_lost
+    close_home_results_lost.or(close_away_results_lost).joins(:match).
+      order("played_at DESC")
+  end
+
+  def close_home_results_won
+    Result.where("results.home_goals - results.away_goals < ?", 3).
+      where("results.home_goals > results.away_goals").
+      where("results.home_goals > 5").
+      where("home_player_ids @> ARRAY[?]", self.id)
+  end
+
+  def close_away_results_won
+    Result.where("results.away_goals - results.home_goals < ?", 3).
+      where("results.away_goals > results.home_goals").
+      where("results.away_goals > 5").
+      where("away_player_ids @> ARRAY[?]", self.id)
+  end
+
+  def close_home_results_lost
+    Result.where("results.away_goals - results.home_goals < ?", 3).
+      where("results.home_goals < results.away_goals").
+      where("results.away_goals > 5").
+      where("home_player_ids @> ARRAY[?]", self.id)
+  end
+
+  def close_away_results_lost
+    Result.where("results.home_goals - results.away_goals < ?", 3).
+      where("results.away_goals < results.home_goals").
+      where("results.home_goals > 5").
+      where("away_player_ids @> ARRAY[?]", self.id)
+  end
+
   def double_stats
     DoubleStats.for_player(self)
   end

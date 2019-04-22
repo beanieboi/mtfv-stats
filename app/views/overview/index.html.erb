@@ -8,13 +8,8 @@
       <div class="field">
         <div class="control">
           <div class="select">
-            <%= select_tag "season_id", options_from_collection_for_select(@seasons, :id, :name, params[:season_id]) %>
-          </div>
-          <div class="select">
-            <select name="league_id" id="league_id">
-              <% League.all.each do |l| %>
-                <%= raw("<option #{params[:league_id].to_i == l.id ? 'selected=selected' : '' } value=\"#{l.id}\" data-season=\"#{l.season.name}\">#{l.name}</option>") %>
-              <% end %>
+            <select name="league_id">
+              <%= option_groups_from_collection_for_select(@seasons, :leagues, :name, :id, :name, params[:league_id]) %>
             </select>
           </div>
           <button class="button is-link">Anzeigen</button>
@@ -31,9 +26,3 @@
   <%= render partial: "rankings/double", locals: { stat: @doubles } %>
   <%= render partial: "rankings/pair", locals: { stat: @pairs } %>
 </section>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    updateLeagueDropdown("season_id", "league_id");
-  });
-</script>

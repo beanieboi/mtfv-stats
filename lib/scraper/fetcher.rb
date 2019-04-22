@@ -39,7 +39,7 @@ module Scraper
         "leagues" => [
           { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=12" },
           { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=13" },
-          { "name" => "Rookieliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=14" },
+          # { "name" => "Rookieliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=14" },
         ]
       },
       {
@@ -54,6 +54,32 @@ module Scraper
         "leagues" => [
           { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=9" },
           { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=8" },
+        ]
+      },
+      {
+        "season" => "2012",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=6" },
+          { "name" => "Landesliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=7" },
+        ]
+      },
+      {
+        "season" => "2011",
+        "leagues" => [
+          { "name" => "Regionalliga Vorrunde", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=2" },
+          { "name" => "Regionalliga Endrunde", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=5" },
+        ]
+      },
+      {
+        "season" => "2010",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=1" },
+        ]
+      },
+      {
+        "season" => "2009",
+        "leagues" => [
+          { "name" => "Regionalliga", "url" => "http://www.mtfv1.de/index.php/de/design-and-features/verbandsligen?task=veranstaltung&veranstaltungid=3 " },
         ]
       }
     ]

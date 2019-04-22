@@ -19,14 +19,14 @@ namespace :maintenance do
     Result.find_in_batches do |results|
       results.each do |result|
         next if result.home_player_ids.count != result.away_player_ids
-        raise StandardError, "Result #{result.id} has invalid player pairs"
+        puts "Result #{result.id} has invalid player pairs"
       end
     end
 
     DoubleStats.find_in_batches do |stats|
       stats.each do |stat|
         next if stat.player_ids.count == 2
-        raise StandardError, "DoubleStats #{stat.id} has invalid player count"
+        puts "DoubleStats #{stat.id} has invalid player count"
       end
     end
   end
