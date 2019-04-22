@@ -1,6 +1,6 @@
 namespace :scraper do
   desc "Scrape mtfv1.de"
-  task :fetch, [:year] => [:environment]  do |t, args|
+  task :fetch, [:year] => [:environment] do |t, args|
     Bundler.require(:scraper)
 
     year = args[:year]
