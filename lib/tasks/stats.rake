@@ -36,7 +36,8 @@ namespace :stats do
   desc "Populate scores and goals for Doubles"
   task doubles: :environment do
     puts "creating double stats"
-    pairs = Result.doubles.collect(&:home_players) + Result.doubles.collect(&:away_players)
+    results = Result.doubles
+    pairs = results.collect(&:home_players) + results.collect(&:away_players)
     pairs.uniq.each do |pair_players|
       pair = DoublePair.new(pair_players)
       DoubleStatsGenerator.generate(pair)
