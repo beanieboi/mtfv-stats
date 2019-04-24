@@ -3,7 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.6.2'
 
-gem 'rails', '~> 6.0.0.beta3'
+gem 'rails', '~> 6.0.0.rc1'
 gem 'pg'
 gem 'puma', '~> 3.11'
 gem 'barnes' # Heroku Ruby Metrics
