@@ -105,6 +105,11 @@ module Scraper
         name_player_two = "Unbekannt"
       end
 
+      external_mtfv_player_one_id ||= 9999999
+      name_player_one ||= "Unbekannt"
+      external_mtfv_player_two_id ||= 9999998
+      name_player_two ||= "Unbekannt"
+
       [
         create_or_find_player(external_mtfv_player_one_id, name_player_one).id,
         create_or_find_player(external_mtfv_player_two_id, name_player_two).id
