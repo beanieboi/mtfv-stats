@@ -5,7 +5,7 @@ ruby '2.6.3'
 
 gem 'rails', '~> 6.0.0.rc1'
 gem 'pg'
-gem 'puma', '~> 3.11'
+gem 'puma'
 gem 'barnes' # Heroku Ruby Metrics
 gem 'scenic'
 
@@ -33,5 +33,6 @@ end
 group :test do
   gem 'capybara', '>= 2.15'
   gem 'selenium-webdriver'
-  gem 'chromedriver-helper'
+  gem 'webdrivers'
+  gem 'simplecov'
 end
