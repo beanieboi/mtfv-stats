@@ -5,7 +5,7 @@ ruby '2.7.2'
 
 gem 'rails', '~> 6.1.0'
 gem 'pg'
-gem 'puma', '~> 5.0'
+gem 'puma', '~> 5.5'
 gem 'barnes' # Heroku Ruby Metrics
 gem 'scenic'
 
