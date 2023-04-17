@@ -1,39 +1,30 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '3.2.2'
 
-gem 'rails', '~> 6.1.0'
+gem 'rails', '~>7'
 gem 'pg'
-gem 'puma', '~> 5.0'
-gem 'barnes' # Heroku Ruby Metrics
+gem 'puma'
 gem 'scenic'
+gem "bootsnap", require: false
 
-gem 'sass-rails', '>= 6'
+gem "sassc-rails"
 gem 'bulma-rails'
 gem 'chart-js-rails'
-
-# Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
-
-group :scraper do
-  gem 'mechanize'
-  gem 'nokogiri'
-end
+gem 'excon'
 
 group :development, :test do
-  gem 'pry-rails'
+  gem "pry-rails"
 end
 
 group :development do
-  gem 'web-console', '>= 4.1.0'
-  gem 'listen', '~> 3.3'
-  gem 'rack-mini-profiler', '~> 2.0'
+  gem "web-console"
 end
 
 group :test do
-  gem 'capybara', '>= 3.26'
-  gem 'selenium-webdriver'
-  gem 'webdrivers'
-  gem 'simplecov'
+  gem "simplecov"
+  gem "capybara"
+  gem "selenium-webdriver"
+  gem "webdrivers"
 end

@@ -5,12 +5,13 @@ SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
+SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
 SET default_tablespace = '';
 
-SET default_with_oids = false;
+SET default_table_access_method = heap;
 
 --
 -- Name: ar_internal_metadata; Type: TABLE; Schema: public; Owner: -
@@ -22,6 +23,35 @@ CREATE TABLE public.ar_internal_metadata (
     created_at timestamp(6) without time zone NOT NULL,
     updated_at timestamp(6) without time zone NOT NULL
 );
+
+
+--
+-- Name: double_pairs; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.double_pairs (
+    id bigint NOT NULL,
+    player_ids integer[]
+);
+
+
+--
+-- Name: double_pairs_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.double_pairs_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: double_pairs_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.double_pairs_id_seq OWNED BY public.double_pairs.id;
 
 
 --
@@ -95,17 +125,33 @@ ALTER SEQUENCE public.leagues_id_seq OWNED BY public.leagues.id;
 
 
 --
+-- Name: players; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.players (
+    id bigint NOT NULL,
+    name text NOT NULL,
+    team_id integer,
+    external_mtfv_id integer NOT NULL,
+    created_at timestamp(6) without time zone NOT NULL,
+    updated_at timestamp(6) without time zone NOT NULL
+);
+
+
+--
 -- Name: lifetime_double_stats; Type: VIEW; Schema: public; Owner: -
 --
 
 CREATE VIEW public.lifetime_double_stats AS
  SELECT double_stats.player_ids,
+    string_agg(concat(players.id, '---', players.name), '|||'::text) AS player_data,
     sum(double_stats.overall_performance_index) AS overall_performance_index,
     sum(double_stats.overall_score) AS overall_score,
     sum(double_stats.overall_score_against) AS overall_score_against,
     sum(double_stats.overall_goals) AS overall_goals,
     sum(double_stats.overall_goals_against) AS overall_goals_against
-   FROM public.double_stats
+   FROM (public.double_stats
+     LEFT JOIN public.players ON ((players.id = ANY (double_stats.player_ids))))
   GROUP BY double_stats.player_ids;
 
 
@@ -218,20 +264,6 @@ CREATE SEQUENCE public.player_stats_id_seq
 --
 
 ALTER SEQUENCE public.player_stats_id_seq OWNED BY public.player_stats.id;
-
-
---
--- Name: players; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.players (
-    id bigint NOT NULL,
-    name text NOT NULL,
-    team_id integer,
-    external_mtfv_id integer NOT NULL,
-    created_at timestamp(6) without time zone NOT NULL,
-    updated_at timestamp(6) without time zone NOT NULL
-);
 
 
 --
@@ -371,6 +403,13 @@ ALTER SEQUENCE public.teams_id_seq OWNED BY public.teams.id;
 
 
 --
+-- Name: double_pairs id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.double_pairs ALTER COLUMN id SET DEFAULT nextval('public.double_pairs_id_seq'::regclass);
+
+
+--
 -- Name: double_stats id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -432,6 +471,14 @@ ALTER TABLE ONLY public.teams ALTER COLUMN id SET DEFAULT nextval('public.teams_
 
 ALTER TABLE ONLY public.ar_internal_metadata
     ADD CONSTRAINT ar_internal_metadata_pkey PRIMARY KEY (key);
+
+
+--
+-- Name: double_pairs double_pairs_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.double_pairs
+    ADD CONSTRAINT double_pairs_pkey PRIMARY KEY (id);
 
 
 --
@@ -507,6 +554,22 @@ ALTER TABLE ONLY public.teams
 
 
 --
+-- Name: matches fk_rails_4d24712928; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.matches
+    ADD CONSTRAINT fk_rails_4d24712928 FOREIGN KEY (league_id) REFERENCES public.leagues(id) ON DELETE CASCADE;
+
+
+--
+-- Name: results fk_rails_ace205692e; Type: FK CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.results
+    ADD CONSTRAINT fk_rails_ace205692e FOREIGN KEY (match_id) REFERENCES public.matches(id) ON DELETE CASCADE;
+
+
+--
 -- PostgreSQL database dump complete
 --
 
@@ -522,6 +585,8 @@ INSERT INTO "schema_migrations" (version) VALUES
 ('20190411213202'),
 ('20190412093050'),
 ('20190412141436'),
-('20190412142258');
+('20190412142258'),
+('20190415150107'),
+('20230417052201');
 
 
